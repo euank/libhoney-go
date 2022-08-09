@@ -605,7 +605,7 @@ func (b *batchAgg) encodeBatchMsgp(events []*Event) ([]byte, int) {
 		// if the event is too large to ever send, add an error to the queue
 		if len(evByt) > apiEventSizeMax {
 			b.enqueueResponse(Response{
-				Err:      fmt.Errorf("event exceeds max event size of %d bytes, API will not accept this event", apiEventSizeMax),
+				Err:      fmt.Errorf("event exceeds max event size of %d bytes, API will not accept this event: %+v", apiEventSizeMax, ev),
 				Metadata: ev.Metadata,
 			})
 			events[i] = nil
